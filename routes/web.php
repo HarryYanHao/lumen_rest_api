@@ -20,8 +20,9 @@ $router->group(['prefix' => 'api/v1'], function() use ($router)
     $router->post('login','SystemAccountController@login');
 
 
-    $router->post('user','UsersController@createUser');
+    $router->post('user/add','UsersController@createUser');
     $router->put('user/edit','UsersController@updateUser');
-    $router->delete('user/{id}','UsersController@deleteUser');
+    $router->delete('user/remove','UsersController@deleteUser');
+    $router->delete('user/batchremove','UsersController@batchDeleteUser');
     $router->get('user/listpage','UsersController@index');
 });

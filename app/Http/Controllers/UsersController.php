@@ -19,7 +19,7 @@ class UsersController extends Controller
     //
     public function createUser(Request $request)
     {
-        $user = User::create($request->all());
+        $user = User::create($request->input('params'));
         return response()->json($user);
     }
 
@@ -38,12 +38,17 @@ class UsersController extends Controller
         return response()->json($user);
     }
 
-    public function deleteUser($id)
+    public function deleteUser(Request $request)
     {
-        $user = User::find($id);
-        $user->delete();
-
-        return response()->json('删除成功');
+        $id = $request->input('id');
+        list($code,$msg,$res) = $this->_doDelete($id);
+        return response()->json($msg);
+    }
+    public function batchDeleteUser(Request $request)
+    {
+        $ids = $request->input('ids');
+        list($code,$msg,$res) = $this->_doDelete($ids);
+        return response()->json($msg);
     }
 
     public function index(Request $request)
@@ -56,5 +61,15 @@ class UsersController extends Controller
         }
 
         return response()->json($user);
+    }
+    private function _doDelete($ids){
+        $id_arr = explode(',',$ids);
+        $res = User::whereIn('id',$id_arr)->delete();
+        if($res){;
+            $returnData = [0,'删除成功',[]];
+        }else{
+            $returnData = [-1,'删除失败',[]];
+        }
+        return $returnData;
     }
 }
