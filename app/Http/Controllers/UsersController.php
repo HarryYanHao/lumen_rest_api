@@ -16,6 +16,15 @@ class UsersController extends Controller
     {
         //
     }
+    public function listUser(Request $request){
+        if(!empty($request->input('name'))){
+            $name = $request->input('name');
+            $user = User::where('names','like','%'.$name.'%')->get();
+        }else{
+            $user = User::get();
+        }
+        return response()->json(['users'=>$user]);
+    }
     //
     public function createUser(Request $request)
     {
@@ -55,7 +64,7 @@ class UsersController extends Controller
     {
         if(!empty($request->input('name'))){
             $name = $request->input('name');
-            $user = User::where('names',$name)->paginate(15);
+            $user = User::where('names','like','%'.$name.'%')->paginate(15);
         }else{
             $user = User::paginate(15);
         }
