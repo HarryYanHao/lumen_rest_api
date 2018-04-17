@@ -11,9 +11,13 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(App\Model\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->email,
+        'names' => $faker->name,
+        'sex'=>$faker->boolean,
+        'age'=>$faker->randomFloat(0,1,100),
+        'birthday'=>$faker->date('Y-m-d'),
+        'address'=>$faker->address,
+
     ];
 });

@@ -23,12 +23,16 @@ class UsersController extends Controller
         return response()->json($user);
     }
 
-    public function updateUser(Request $request, $id)
+    public function updateUser(Request $request)
     {
+        $params = $request->input('params');
+        $id = array_get($params,'id');
         $user = User::find($id);
-        $user->make = $request->input('make');
-        $user->model = $request->input('model');
-        $user->year = $request->input('year');
+        $user->names = array_get($params,'names');
+        $user->sex = array_get($params,'sex');
+        $user->birthday = array_get($params,'birthday');
+        $user->address = array_get($params,'address');
+
         $user->save();
 
         return response()->json($user);
@@ -42,9 +46,15 @@ class UsersController extends Controller
         return response()->json('删除成功');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $user = User::all();
+        if(!empty($request->input('name'))){
+            $name = $request->input('name');
+            $user = User::where('names',$name)->paginate(15);
+        }else{
+            $user = User::paginate(15);
+        }
+
         return response()->json($user);
     }
 }

@@ -21,7 +21,7 @@ $router->group(['prefix' => 'api/v1'], function() use ($router)
 
 
     $router->post('user','UsersController@createUser');
-    $router->put('user/{id}','UsersController@updateUser');
+    $router->put('user/edit','UsersController@updateUser');
     $router->delete('user/{id}','UsersController@deleteUser');
     $router->get('user/listpage','UsersController@index');
 });
