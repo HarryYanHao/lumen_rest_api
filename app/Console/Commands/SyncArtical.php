@@ -41,7 +41,7 @@ class SyncArtical extends Command{
     public function handle()
     {
         //这里编写需要执行的动作
-        $filename = '/tmp'.date('Y-m-d',time()).'.json';
+        $filename = '/tmp/data'.date('Y-m-d',time()).'.json';
         $handle = fopen($filename,'r');
         $artical = [];
         while (!feof($handle)){

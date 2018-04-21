@@ -25,7 +25,7 @@ $router->group(['prefix' => 'api/v1'], function() use ($router)
     $router->delete('user/remove','UsersController@deleteUser');
     $router->delete('user/batchremove','UsersController@batchDeleteUser');
     $router->get('user/listpage','UsersController@index');
-
-
     $router->get('user/list','UsersController@listUser');
+
+    $router->get('artical/list','ArticalController@listArtical');
 });
