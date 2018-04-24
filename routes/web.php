@@ -28,4 +28,8 @@ $router->group(['prefix' => 'api/v1'], function() use ($router)
     $router->get('user/list','UsersController@listUser');
 
     $router->get('artical/list','ArticalController@listArtical');
+
+
+    //商品信息表
+    $router->get('goods/list','GoodsController@index');
 });
