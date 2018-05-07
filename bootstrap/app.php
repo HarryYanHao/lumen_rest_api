@@ -27,6 +27,8 @@ $app = new Laravel\Lumen\Application(
 
  $app->withEloquent();
 
+ $app->configure('cors');
+
 /*
 |--------------------------------------------------------------------------
 | Register Container Bindings

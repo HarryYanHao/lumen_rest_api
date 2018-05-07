@@ -27,12 +27,7 @@ class CorsMiddleware
             'Access-Control-Max-Age' => 1728000 //该字段可选，用来指定本次预检请求的有效期，在此期间，不用发出另一条预检请求。
         ];
 
-        $this->allow_origin = [
-            'http://127.0.0.1',
-            'http://127.0.0.1:8080',
-            'http://localhost',
-            'http://localhost:8080',
-        ];
+        $this->allow_origin = config('cors.hosts');
         $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
 
         //如果origin不在允许列表内，直接返回403
